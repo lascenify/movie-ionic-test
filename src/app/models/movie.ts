@@ -12,4 +12,5 @@ export interface Movie {
   popularity: number;
   poster_path: string;
   release_date: string;
+  original_language: string;
 }

@@ -1,9 +1,22 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>movie-detail</ion-title>
+    <ion-title>{{movie.title}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-
+  <ion-img class="ion-align-self-center" [src]="'https://image.tmdb.org/t/p/original/'+movie.poster_path"></ion-img>
+  <ion-item>
+    <ion-label slot="start" class="ion-text-wrap">
+      <h4>{{movie.title}}</h4>
+    </ion-label>
+    <ion-label slot="end">
+      <h4>{{movie.release_date | date:'dd/MM/yyyy'}}</h4>
+    </ion-label>
+  </ion-item>
+  <ion-item>
+    <ion-label class="ion-text-wrap">
+      <h5>{{movie.overview}}</h5>
+    </ion-label>
+  </ion-item>
 </ion-content>

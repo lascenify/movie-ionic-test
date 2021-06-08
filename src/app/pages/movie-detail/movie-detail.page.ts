@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Movie } from 'src/app/models/movie';
 
 @Component({
   selector: 'app-movie-detail',
@@ -6,10 +8,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./movie-detail.page.scss'],
 })
 export class MovieDetailPage implements OnInit {
+  movie: Movie;
 
-  constructor() { }
+  constructor(private readonly router: Router) {}
 
   ngOnInit() {
+    const params = this.router.getCurrentNavigation().extras.state;
+    this.movie = params?.movie;
   }
-
 }

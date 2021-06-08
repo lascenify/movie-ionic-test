@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NavController } from '@ionic/angular';
 import { Movie, MovieListResult } from 'src/app/models/movie';
 import { MovieService } from 'src/app/services/movie.service';
 
@@ -10,7 +11,10 @@ import { MovieService } from 'src/app/services/movie.service';
 export class MovieListPage implements OnInit {
   movies: Movie[];
 
-  constructor(private readonly movieService: MovieService) {}
+  constructor(
+    private readonly movieService: MovieService,
+    private readonly navCtrl: NavController
+  ) {}
 
   async ngOnInit() {
     this.movieService.getPopularMovies().subscribe((res: MovieListResult) => {
@@ -19,6 +23,12 @@ export class MovieListPage implements OnInit {
         res
       );
       this.movies = res.results;
+    });
+  }
+
+  navToMovieDetail(movie: Movie) {
+    this.navCtrl.navigateForward('/movie-detail', {
+      state: { movie },
     });
   }
 }
