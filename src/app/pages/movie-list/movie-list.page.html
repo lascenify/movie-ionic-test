@@ -5,7 +5,7 @@
 </ion-header>
 
 <ion-content>
-  <ion-searchbar></ion-searchbar>
+  <ion-searchbar [(ngModel)]="searchQuery" (ionChange)="onSearchInputChanged()"></ion-searchbar>
   <ion-list>
     <ion-item *ngFor="let movie of movies">
       <ion-label>{{movie.title}}</ion-label>

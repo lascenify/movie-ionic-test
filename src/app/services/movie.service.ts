@@ -17,5 +17,9 @@ export class MovieService {
 
   getDetail() {}
 
-  search() {}
+  search(title: string): Observable<MovieListResult> {
+    return this.httpClient.get<MovieListResult>(
+      `${environment.theMovieDbConfig.baseURL}/3/search/movie?api_key=${environment.theMovieDbConfig.apiKey}&language=es-ES&query=${title}&page=1&include_adult=true`
+    );
+  }
 }
