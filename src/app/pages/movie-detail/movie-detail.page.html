@@ -1,11 +1,14 @@
 <ion-header>
   <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button text="ATRÁS"></ion-back-button>
+    </ion-buttons>
     <ion-title>{{movie.title}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-img class="ion-align-self-center" [src]="'https://image.tmdb.org/t/p/original/'+movie.poster_path"></ion-img>
+  <ion-img class="ion-align-self-center" [src]="'https://image.tmdb.org/t/p/original/'+movie.poster_path" *ngIf="movie.poster_path != 'N/A'"></ion-img>
   <ion-item>
     <ion-label slot="start" class="ion-text-wrap">
       <h4>{{movie.title}}</h4>
