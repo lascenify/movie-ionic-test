@@ -29,10 +29,10 @@ export class MovieListPage implements OnInit {
   loadData(event) {
     this.pageNumber++;
     if (this.searchQuery?.length > 0) {
-      if (!this.isSearching) this.cleanMovies();
+      if (!this.isSearching) this.cleanMovies(event);
       this.searchMovies();
     } else {
-      if (this.isSearching) this.cleanMovies();
+      if (this.isSearching) this.cleanMovies(event);
       this.getPopularMovies();
     }
     setTimeout(() => {
@@ -71,7 +71,8 @@ export class MovieListPage implements OnInit {
       });
   }
 
-  private cleanMovies() {
+  private cleanMovies(event?: any) {
+    if (event) event.target.disabled = false;
     this.movies = [];
     this.pageNumber = 1;
   }
