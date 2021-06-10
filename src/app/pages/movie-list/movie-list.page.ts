@@ -53,6 +53,7 @@ export class MovieListPage implements OnInit {
           res
         );
         this.movies = this.movies.concat(res.results);
+        this.totalOfMovies = res.total_results;
       });
   }
 
@@ -66,6 +67,7 @@ export class MovieListPage implements OnInit {
           res
         );
         this.movies = this.movies.concat(res.results);
+        this.totalOfMovies = res.total_results;
       });
   }
 
