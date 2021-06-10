@@ -23,12 +23,12 @@ export class MovieListPage implements OnInit {
 
   onSearchInputChanged() {
     this.cleanMovies();
-    this.searchQuery.length > 0 ? this.searchMovies() : this.getPopularMovies();
+    this.isSearchInputFilled() ? this.searchMovies() : this.getPopularMovies();
   }
 
   loadData(event) {
     this.pageNumber++;
-    if (this.searchQuery?.length > 0) {
+    if (this.isSearchInputFilled()) {
       if (!this.isSearching) this.cleanMovies(event);
       this.searchMovies();
     } else {
@@ -43,13 +43,17 @@ export class MovieListPage implements OnInit {
     }, 500);
   }
 
+  private isSearchInputFilled() {
+    return this.searchQuery?.length > 0;
+  }
+
   private getPopularMovies() {
     this.isSearching = false;
     this.movieService
       .getPopularMovies(this.pageNumber)
       .subscribe((res: MovieListResult) => {
         console.log(
-          '🚀 ~ file: movie-list.page.ts ~ line 33 ~ MovieListPage ~ popular movies',
+          '🚀 ~ file: movie-list.page.ts ~ line 55 ~ MovieListPage ~ popular movies',
           res
         );
         this.movies = this.movies.concat(res.results);
@@ -63,7 +67,7 @@ export class MovieListPage implements OnInit {
       .search(this.searchQuery, this.pageNumber)
       .subscribe((res: MovieListResult) => {
         console.log(
-          '🚀 ~ file: movie-list.page.ts ~ line 64 ~ MovieListPage ~ result of movies search',
+          '🚀 ~ file: movie-list.page.ts ~ line 69 ~ MovieListPage ~ result of movies search',
           res
         );
         this.movies = this.movies.concat(res.results);
