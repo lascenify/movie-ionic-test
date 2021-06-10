@@ -25,9 +25,19 @@
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
 
+/* Bar rating default awesome styles */
+@import "~ngx-bar-rating/themes/br-movie-theme";
+
 ion-img {
   display: block;
   margin-left: auto;
   margin-right: auto;
   width: 50%;
+}
+
+bar-rating {
+  margin-top: 2rem;
+  margin-right: 0.5rem;
+  margin-bottom: 0.5rem;
+  width: 40%;
 }

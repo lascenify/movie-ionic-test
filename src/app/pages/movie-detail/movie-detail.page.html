@@ -9,13 +9,18 @@
 
 <ion-content>
   <ion-img class="ion-align-self-center" [src]="'https://image.tmdb.org/t/p/original/'+movie.poster_path" *ngIf="movie.poster_path != 'N/A'"></ion-img>
-  <ion-item>
+  <ion-item lines="none">
     <ion-label slot="start" class="ion-text-wrap">
       <h4>{{movie.title}}</h4>
     </ion-label>
     <ion-label slot="end">
       <h4>{{movie.release_date | date:'dd/MM/yyyy'}}</h4>
     </ion-label>
+  </ion-item>
+  <ion-item lines="none">
+    <bar-rating slot="start" [rate]="movie.vote_average / 10 * 4 | number: '1.2-2'" [max]="4" [theme]="'movie'" [showText]="true"
+                [titles]="['Mala', 'Mediocre' , 'Buena', 'Genial']" [readOnly]="true"></bar-rating>
+    <ion-label class="ion-text-wrap" slot="end">Número de votos: {{movie.vote_count}}</ion-label>
   </ion-item>
   <ion-item>
     <ion-label class="ion-text-wrap">
