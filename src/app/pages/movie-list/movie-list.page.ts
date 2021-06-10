@@ -10,9 +10,11 @@ import { MovieService } from 'src/app/services/movie.service';
 export class MovieListPage implements OnInit {
   movies: Movie[] = [];
   searchQuery: string;
-  totalOfMovies: number;
-  pageNumber = 1;
-  pageLimit = 8;
+
+  private totalOfMovies: number;
+  private pageNumber = 1;
+  private isSearching = false;
+
   constructor(private readonly movieService: MovieService) {}
 
   async ngOnInit() {
@@ -20,14 +22,17 @@ export class MovieListPage implements OnInit {
   }
 
   onSearchInputChanged() {
+    this.cleanMovies();
     this.searchQuery.length > 0 ? this.searchMovies() : this.getPopularMovies();
   }
 
   loadData(event) {
     this.pageNumber++;
     if (this.searchQuery?.length > 0) {
+      if (!this.isSearching) this.cleanMovies();
       this.searchMovies();
     } else {
+      if (this.isSearching) this.cleanMovies();
       this.getPopularMovies();
     }
     setTimeout(() => {
@@ -39,6 +44,7 @@ export class MovieListPage implements OnInit {
   }
 
   private getPopularMovies() {
+    this.isSearching = false;
     this.movieService
       .getPopularMovies(this.pageNumber)
       .subscribe((res: MovieListResult) => {
@@ -51,14 +57,20 @@ export class MovieListPage implements OnInit {
   }
 
   private searchMovies() {
+    this.isSearching = true;
     this.movieService
-      .search(this.searchQuery)
+      .search(this.searchQuery, this.pageNumber)
       .subscribe((res: MovieListResult) => {
         console.log(
-          '🚀 ~ file: movie-list.page.ts ~ line 23 ~ MovieListPage ~ result of movies search',
+          '🚀 ~ file: movie-list.page.ts ~ line 64 ~ MovieListPage ~ result of movies search',
           res
         );
-        this.movies = res.results;
+        this.movies = this.movies.concat(res.results);
       });
+  }
+
+  private cleanMovies() {
+    this.movies = [];
+    this.pageNumber = 1;
   }
 }
