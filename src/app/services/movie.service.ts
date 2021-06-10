@@ -9,9 +9,9 @@ import { Observable } from 'rxjs';
 export class MovieService {
   constructor(private readonly httpClient: HttpClient) {}
 
-  getPopularMovies(): Observable<MovieListResult> {
+  getPopularMovies(pageNumber: number): Observable<MovieListResult> {
     return this.httpClient.get<MovieListResult>(
-      `${environment.theMovieDbConfig.baseURL}/3/movie/popular?api_key=${environment.theMovieDbConfig.apiKey}&language=es-ES&page=1`
+      `${environment.theMovieDbConfig.baseURL}/3/movie/popular?api_key=${environment.theMovieDbConfig.apiKey}&language=es-ES&page=${pageNumber}`
     );
   }
 
