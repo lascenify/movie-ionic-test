@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NavController } from '@ionic/angular';
 import { Movie, MovieListResult } from 'src/app/models/movie';
 import { MovieService } from 'src/app/services/movie.service';
 
@@ -15,7 +16,10 @@ export class MovieListPage implements OnInit {
   private pageNumber = 1;
   private isSearching = false;
 
-  constructor(private readonly movieService: MovieService) {}
+  constructor(
+    private readonly movieService: MovieService,
+    private readonly navCtrl: NavController
+  ) {}
 
   async ngOnInit() {
     this.getPopularMovies();
@@ -79,5 +83,11 @@ export class MovieListPage implements OnInit {
     if (event) event.target.disabled = false;
     this.movies = [];
     this.pageNumber = 1;
+  }
+
+  navToMovieDetail(movie: Movie) {
+    this.navCtrl.navigateForward('/movie-detail', {
+      state: { movie },
+    });
   }
 }
