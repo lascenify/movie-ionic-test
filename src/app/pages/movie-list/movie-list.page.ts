@@ -47,6 +47,10 @@ export class MovieListPage implements OnInit {
     }, 500);
   }
 
+  navToMovieDetail(movie: Movie) {
+    this.navCtrl.navigateForward(`/movies/${movie.id}`);
+  }
+
   private isSearchInputFilled() {
     return this.searchQuery?.length > 0;
   }
@@ -83,9 +87,5 @@ export class MovieListPage implements OnInit {
     if (event) event.target.disabled = false;
     this.movies = [];
     this.pageNumber = 1;
-  }
-
-  navToMovieDetail(movie: Movie) {
-    this.navCtrl.navigateForward(`/movies/${movie.id}`);
   }
 }
