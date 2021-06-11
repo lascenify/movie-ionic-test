@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
+import { NavController } from '@ionic/angular';
 import { Movie } from 'src/app/models/movie';
+import { MovieService } from 'src/app/services/movie.service';
 
 @Component({
   selector: 'app-movie-detail',
@@ -10,10 +12,25 @@ import { Movie } from 'src/app/models/movie';
 export class MovieDetailPage implements OnInit {
   movie: Movie;
 
-  constructor(private readonly router: Router) {}
+  constructor(
+    private activatedRoute: ActivatedRoute,
+    private movieService: MovieService,
+    private navCtrl: NavController
+  ) {}
 
   ngOnInit() {
-    const params = this.router.getCurrentNavigation().extras.state;
-    this.movie = params?.movie;
+    let id = this.activatedRoute.snapshot.paramMap.get('id');
+    this.getMovieDetails(id);
+  }
+
+  private getMovieDetails(id: string) {
+    this.movieService.getDetail(id).subscribe(
+      (movie) => {
+        this.movie = movie;
+      },
+      () => {
+        this.navCtrl.navigateRoot('');
+      }
+    );
   }
 }

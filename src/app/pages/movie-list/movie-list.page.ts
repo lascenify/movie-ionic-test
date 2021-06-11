@@ -86,8 +86,6 @@ export class MovieListPage implements OnInit {
   }
 
   navToMovieDetail(movie: Movie) {
-    this.navCtrl.navigateForward('/movie-detail', {
-      state: { movie },
-    });
+    this.navCtrl.navigateForward(`/movies/${movie.id}`);
   }
 }

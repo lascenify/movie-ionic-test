@@ -41,6 +41,7 @@ describe('MovieService', () => {
         total_results: 3,
         results: [
           {
+            id: 1,
             title: 'Película 1',
             overview: 'overview película 1',
             poster_path: 'N/A',
@@ -49,6 +50,7 @@ describe('MovieService', () => {
             vote_count: 230,
           },
           {
+            id: 2,
             title: 'Película 2',
             overview: 'overview película 2',
             poster_path: 'N/A',
@@ -57,6 +59,7 @@ describe('MovieService', () => {
             vote_count: 231,
           },
           {
+            id: 3,
             title: 'Película 3',
             overview: 'overview película 3',
             poster_path: 'N/A',
@@ -102,6 +105,7 @@ describe('MovieService', () => {
         total_results: 1,
         results: [
           {
+            id: 1,
             title: 'Película 1',
             overview: 'overview película 1',
             poster_path: 'N/A',
