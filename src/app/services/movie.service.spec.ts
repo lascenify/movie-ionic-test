@@ -23,6 +23,11 @@ describe('MovieService', () => {
     service = TestBed.inject(MovieService);
   });
 
+  afterEach(() => {
+    // After every test, assert that there are no more pending requests.
+    httpTestingController.verify();
+  });
+
   it('should be created', () => {
     expect(service).toBeTruthy();
   });
@@ -61,10 +66,6 @@ describe('MovieService', () => {
           },
         ],
       };
-    });
-    afterEach(() => {
-      // After every test, assert that there are no more pending requests.
-      httpTestingController.verify();
     });
     it('should return expected movies (called once)', () => {
       service
@@ -110,10 +111,6 @@ describe('MovieService', () => {
           },
         ],
       };
-    });
-    afterEach(() => {
-      // After every test, assert that there are no more pending requests.
-      httpTestingController.verify();
     });
     it('should return searched movies (called once)', () => {
       service.search('1', 1).subscribe((popularMovies: MovieListResult) => {
